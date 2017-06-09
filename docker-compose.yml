@@ -1,0 +1,38 @@
+version: '3'
+ 
+services:
+ 
+  mysql:
+    image: inspurworld/ibpm_mysql
+    ports:
+      - 3306:3306
+    hostname: ibpm_mysql
+      
+  superset:
+    image: inspurworld/ibpm_superset
+    ports:
+      - 8082:8088
+    hostname: ibpm_superset
+    links:
+      - mysql
+
+  ui:
+    image: inspurworld/ibpm_ui
+    ports:
+      - 8083:8080
+    hostname: ibpm_ui
+    links:
+      - mysql
+
+  api:
+    image: inspurworld/ibpm_api
+    ports:
+      - "9877:8080"
+      - "1337:1337"
+
+    hostname: ibpm_api
+    stdin_open: true
+    tty: true
+    command: run.sh
+    links: 
+      - mysql
