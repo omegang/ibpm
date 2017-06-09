@@ -11,7 +11,7 @@ services:
   superset:
     image: inspurworld/ibpm_superset
     ports:
-      - 8082:8088
+      - 8088:8088
     hostname: ibpm_superset
     links:
       - mysql
